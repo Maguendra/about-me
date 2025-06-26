@@ -1,0 +1,168 @@
+<div id="game">
+  <div id="ball"></div>
+</div>
+
+<div id="powerbar">
+  <div id="powerbar-fill"></div>
+</div>
+
+#game {
+  width:70vmin;
+  height:70vmin;
+  margin: 10vmin auto 2vmin auto;
+  background: purple;
+  border-radius:10px;
+  position:relative;
+
+  #ball {
+    width:6%;
+    height:6%;
+    background:white;
+    position:absolute;
+    left:50%;
+    top:97%;
+    border-radius:100%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+
+#powerbar {
+  width:70vmin;
+  height:10vmin;
+  margin: 0 auto;
+  background:white;
+  border:2px solid blue;
+  border-radius:10px;
+  display:flex;
+  overflow:hidden;
+
+  #powerbar-fill {
+    width:20%;
+    background:blue;
+  }
+}
+
+#powerbar {
+  width:70vmin;
+  height:10vmin;
+  margin: 0 auto;
+  background:white;
+  border:2px solid blue;
+  border-radius:10px;
+  display:flex;
+  overflow:hidden;
+
+  #powerbar-fill {
+    width:20%;
+    background:blue;
+  }
+
+  // When the mouse is held down, charge up the powerbar
+
+// When the mouse is released, move the ball as far as the 
+// powerbar is charged (ie if it's fully charged, move 
+// the ball to the top). Then lower it back down again.
+
+/*************
+**************
+* Data Setup *
+**************
+**************/
+const powerbar = {
+  state: "pending", // "pending" | "charging" | "discharging"
+  chargedPercentage: 0,
+  fillElem: document.querySelector("#powerbar-fill")
+}
+const ball = {
+  cx: 50,
+  cy: 20,
+  velocityX: -2,
+  velocityY: -2,
+  elem: document.querySelector("#ball")
+}
+
+/****************
+*****************
+* EventHandlers *
+*****************
+****************/
+window.addEventListener('pointerdown', () => {
+  powerbar.state = "charging"
+})
+window.addEventListener('pointerup', () => {
+  powerbar.state = "discharging"
+})
+
+/********************
+*********************
+* Game Loop Shizzle *
+*********************
+********************/
+
+// Periodically, increase the chargedPercentage
+function updateChargedPercentage() {
+  if(powerbar.state == "pending") { return }
+  
+  if(powerbar.state == "charging") { 
+    if(powerbar.chargedPercentage >= 100) { return }
+    if(powerbar.chargedPercentage < 1) {
+      powerbar.chargedPercentage = 1;
+    }
+    else {
+      powerbar.chargedPercentage *= 1.04;
+    }
+  }
+  else {
+    if(powerbar.chargedPercentage <= 0) {
+      powerbar.chargedPercentage = 0
+      powerbar.state = "pending"
+    }
+    else {
+      powerbar.chargedPercentage -= 0.5;
+    }
+  }
+}
+
+function updateBallPosition() {
+  if(powerbar.state != "discharging") { return }
+
+  // If we hit an edge, bounce.
+  if(ball.cx <= 3 || ball.cx >= 97) { 
+    ball.velocityX *= -(0.2 + Math.random() * 2)
+  }
+  
+  // If we hit an edge, bounce.
+  if(ball.cy <= 3 || ball.cy >= 97) { 
+    ball.velocityY *= -(0.2 + Math.random() * 2)
+  }
+
+  ball.cx += ball.velocityX
+  ball.cy += ball.velocityY
+}
+
+function renderPowerbar() {
+  powerbar.fillElem.style.width = `${powerbar.chargedPercentage}%`
+}
+function renderBall() {
+  ball.elem.style.left = `${ball.cx}%`
+  ball.elem.style.top = `${ball.cy}%`
+}
+
+
+// This runs every 1/60th of a second
+function gameLoop() {
+  // Game Logic...
+  updateChargedPercentage()
+  updateBallPosition()
+  
+  // Rendering...
+  renderPowerbar()
+  renderBall()
+
+  // Go again in 16ms...
+  requestAnimationFrame(gameLoop)
+}
+
+gameLoop()
+
+https://forum.exercism.org/t/labs-7th-june-js-playground/17820/2

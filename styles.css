@@ -1,0 +1,40 @@
+#game{
+    width: 70vmin;
+    height: 70vmin;
+    margin: 10vmin auto 2vmin auto;
+    background: purple;
+    position: relative;
+    border-radius: 10px;
+}
+
+#powerbar {
+    width: 70vmin;
+    margin: 0 auto;
+    height: 10vmin;
+    background: white;
+    border: 2px solid blue;
+    border-radius: 10px;
+    display: flex;
+
+    #powerbar-fill  {
+        width: 20%;
+        background: blue;
+    }
+
+    
+}
+
+
+
+
+#ball {
+    position: absolute;
+    height: 6%;
+    width: 6%;
+    background: white;
+    left: 50%;
+    bottom: 0;
+    border-radius: 100%;
+    transform: translateX(-50%) translateY(-50%);
+    top: 97%;
+}
