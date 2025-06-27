@@ -1,6 +1,6 @@
 //When the mouse is helf down, charge up power bar
 //when mouse is released, move the ball as fare as the power bar is charge, then lower it back down
-// variable pour la barre, reprendre à 1h25
+// variable pour la barre,
 //**************DATA**************
 const powerbar = {
     chargedPercentage : 0,
@@ -11,7 +11,8 @@ const game = {
 }
 const ball = {
     elem: document.querySelector("#ball"),
-    cy: 97
+    cy: 50,
+    velocityY: -0.3,
 }
 //**************EVENT HANDLERS**************
 //when the mouse is pressed, change state
@@ -28,14 +29,16 @@ function updateChargedPercentage() {
     
     if(game.state == "charging") { 
         if(powerbar.chargedPercentage >= 100) { return }
-        if(powerbar.chargedPercentage < 0){
-            powerbar.chargedPercentage = 0
-            game.state = "pending"
+        if(powerbar.chargedPercentage < 1){
+            powerbar.chargedPercentage = 1
         }
         powerbar.chargedPercentage *= 1.03;
      }else{
-         if(powerbar.chargedPercentage <= 0) { game.state == "pending" }else{
-            powerbar.chargedPercentage -= 1.03;
+         if(powerbar.chargedPercentage <= 0) {
+            powerbar.chargedPercentage = 0
+             game.state = "pending" 
+         }else{
+            powerbar.chargedPercentage -= 0.5;
          }
         
      }
@@ -46,7 +49,9 @@ function updateChargedPercentage() {
 function updateBallPosition() {
     if(game.state != "discharging") {return}
 
-    ball.cy -= 0.5
+    if(ball.cy <= 3 || ball.cy >= 97) {ball.velocityY *= -1}
+
+    ball.cy += ball.velocityY
 }
 
 
