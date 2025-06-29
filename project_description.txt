@@ -1,0 +1,19 @@
+
+1 - change the background - forest
+2 - add a round play button
+         - when click the ball goes up in 5 sec and goes down in 5 sec 
+         - button goes see through while game is playing
+         - when clicked again, the game is paused - Pause appears 
+         
+3 - a timer is located in the middle of the screen - when reaches 0, game ends
+4 - a progress bar is on top of the timer
+5 - when the game starts, "breathe in" appears, when the ball reaches the top, breathe out appears
+6 - written in small - cardiac coherence
+
+
+
+- when the button is clicked, a stop button appears bottom right
+- a 3min timer appears
+- when the ball reaches the middle : opacity changes to see-through
+- a frame with cardiac coherence written
+-change color of the instruction do linear gradient green leaf to blue

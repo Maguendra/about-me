@@ -1,16 +1,43 @@
 #game{
+    display: flex;
     width: 70vmin;
     height: 70vmin;
     margin: 10vmin auto 2vmin auto;
-    background: purple;
+    background-image: url('./dome.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     position: relative;
     border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    
+
+    #play-button {
+        position: absolute;
+        height: 200px;
+        width: 200px;
+        transform: translateX(-50%) translateY(-50%);
+        
+    }    
+
+    #instruction {
+        position: absolute;
+        font-size: 40px;
+        font-family:'Lucida Sans';
+        color:rgb(45, 145, 75);
+        background-color: white;
+        padding: 10px 10px;
+        border-radius: 10px
+        }
 }
+
+
 
 #powerbar {
     width: 70vmin;
     margin: 0 auto;
-    height: 10vmin;
+    height: 5vmin;
     background: white;
     border: 2px solid blue;
     border-radius: 10px;
@@ -18,15 +45,10 @@
 
     #powerbar-fill  {
         width: 20%;
-        background: blue;
+        background: blue;    
     }
-
-    
 }
-
-
-
-
+    
 #ball {
     position: absolute;
     height: 6%;
@@ -37,4 +59,8 @@
     border-radius: 100%;
     transform: translateX(-50%) translateY(-50%);
     top: 97%;
+}
+body {
+	background-color: #666;	
+    
 }
