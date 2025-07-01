@@ -11,9 +11,9 @@
 6 - written in small - cardiac coherence
 
 
-
+TO DO LIST 
 - when the button is clicked, a stop button appears bottom right
 - a 3min timer appears
-- when the ball reaches the middle : opacity changes to see-through
+- when the ball reaches the middle : opacity changes to see-through : CORRECT CODE 
 - a frame with cardiac coherence written
 -change color of the instruction do linear gradient green leaf to blue

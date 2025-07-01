@@ -16,6 +16,15 @@ const ball = {
 const play_button = document.querySelector("#play-button");
 
 const instruction = document.querySelector("#instruction");
+
+const instruction_Rect = instruction.getBoundingClientRect();
+console.log(instruction_Rect);
+const game_Rect = document.querySelector("#game").getBoundingClientRect();
+
+
+
+
+
 //**************INITIALIZATION**************
 instruction.style.display = "none"; // Hide instruction initially 
 
@@ -30,6 +39,25 @@ play_button.addEventListener('click', ()=>{
 
 ////**************HELPER FUNCTIONS**************
 
+function updateInstructionRect() {
+    let ballBottom = ball.cy + ball.width / 2;
+    let ballTop = ball.cy - ball.width / 2;
+    const instruction_Rect_Bottom_Pct = instruction_Rect.bottom / game_Rect.height * 100;
+    const instruction_Rect_Top_Pct = instruction_Rect.top / game_Rect.height * 100;
+
+
+
+    console.log("ballBottom: " + ballBottom);
+    console.log("ballTop: " + ballTop); 
+    console.log("instruction_Rect_Top_Pct " + instruction_Rect_Top_Pct);
+    console.log("instruction_Rect_Bottom_Pct " + instruction_Rect_Bottom_Pct);
+
+    if (ballBottom >= instruction_Rect_Top_Pct && ballTop  <= instruction_Rect_Bottom_Pct) {
+        instruction.style.opacity = 0;
+    }else {
+        instruction.style.opacity = 0.8;
+    }
+}
 
 function updateBallPosition() {
     if(game.state != "start") {return}
@@ -70,7 +98,8 @@ function renderBall(){
 //**************GAME LOOP**************
 function gameLoop() {    
     updateBallPosition()
-    updateInstructionText()    
+    updateInstructionText()
+    updateInstructionRect()    
     renderBall()
     requestAnimationFrame(gameLoop)
 }

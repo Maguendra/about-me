@@ -23,29 +23,34 @@
 
     #instruction {
         position: absolute;
-        font-size: 40px;
-        font-family:'Lucida Sans';
-        color:rgb(45, 145, 75);
-        background-color: white;
-        padding: 10px 10px;
-        border-radius: 10px
+        font-size: 25px;
+        font-family:"Style Script";
+        color:white;
+        font-weight: 300;
+        background: linear-gradient(45deg, #1f14bb, #71b181);
+        padding: 5px 5px;
+        border-radius: 10px;
+        opacity: 0.8;
         }
 }
 
 
 
-#powerbar {
-    width: 70vmin;
-    margin: 0 auto;
-    height: 5vmin;
-    background: white;
-    border: 2px solid blue;
-    border-radius: 10px;
+#main-title {
+    
     display: flex;
+    align-items: center;
+    justify-content: center;
 
-    #powerbar-fill  {
-        width: 20%;
-        background: blue;    
+    h1  {
+        width: 100%;
+        background: #71b181;    
+        color: white;        
+        font-size:30px;
+        text-align: center;
+        font-family: "Style Script";
+        font-weight: 400;
+        font-style: normal;
     }
 }
     
@@ -53,7 +58,7 @@
     position: absolute;
     height: 6%;
     width: 6%;
-    background: white;
+    background: linear-gradient(45deg, #1f14bb, #71b181);;
     left: 50%;
     bottom: 0;
     border-radius: 100%;
@@ -61,6 +66,6 @@
     top: 97%;
 }
 body {
-	background-color: #666;	
+	background-color: #71b181;	
     
 }
