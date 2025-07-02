@@ -81,7 +81,7 @@ function updateCancelButton() {
     if (game.state === "pending") {
         cancel_button.style.display = "none"; // Hide cancel button when game is pending
     }else{
-        cancel_button.style.display = "block"; // Show cancel button when game is active
+        cancel_button.style.display = "flex"; // Show cancel button when game is active
     }
 }
 
