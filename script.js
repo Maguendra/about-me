@@ -4,7 +4,7 @@ const powerbar = {
     fillElem: document.querySelector("#powerbar-fill")
 }
 const game = {
-    state : "pending" //"end" "start"
+    state : "pending" //"start"
 }
 const ball = {
     elem: document.querySelector("#ball"),
@@ -17,9 +17,8 @@ const play_button = document.querySelector("#play-button");
 
 const instruction = document.querySelector("#instruction");
 
-const instruction_Rect = instruction.getBoundingClientRect();
-console.log(instruction_Rect);
-const game_Rect = document.querySelector("#game").getBoundingClientRect();
+const cancel_button = document.querySelector("#cancel-button");
+
 
 
 
@@ -36,23 +35,19 @@ play_button.addEventListener('click', ()=>{
     instruction.style.display = "flex"; // Show instruction when the game starts
     ball.velocityY = -Math.abs(ball.velocityY); // Ensure the ball moves upwards
 })
+//when the cancel button is clicked, the game stops
+cancel_button.addEventListener('click', ()=>{
+    game.state = "pending";
+    ball.cy = 96; // Reset ball position
+    play_button.style.display = "block"; // Show play button again
+    instruction.style.display = "none"; // Hide instruction when the game ends
+})
 
 ////**************HELPER FUNCTIONS**************
 
-function updateInstructionRect() {
-    let ballBottom = ball.cy + ball.width / 2;
-    let ballTop = ball.cy - ball.width / 2;
-    const instruction_Rect_Bottom_Pct = instruction_Rect.bottom / game_Rect.height * 100;
-    const instruction_Rect_Top_Pct = instruction_Rect.top / game_Rect.height * 100;
+function updateInstructionRect() {   
 
-
-
-    console.log("ballBottom: " + ballBottom);
-    console.log("ballTop: " + ballTop); 
-    console.log("instruction_Rect_Top_Pct " + instruction_Rect_Top_Pct);
-    console.log("instruction_Rect_Bottom_Pct " + instruction_Rect_Bottom_Pct);
-
-    if (ballBottom >= instruction_Rect_Top_Pct && ballTop  <= instruction_Rect_Bottom_Pct) {
+    if (ball.cy >= 45 && ball.cy  <= 55) {
         instruction.style.opacity = 0;
     }else {
         instruction.style.opacity = 0.8;
@@ -82,6 +77,15 @@ function updateInstructionText() {
     }
 }
 
+function updateCancelButton() {
+    if (game.state === "pending") {
+        cancel_button.style.display = "none"; // Hide cancel button when game is pending
+    }else{
+        cancel_button.style.display = "block"; // Show cancel button when game is active
+    }
+}
+
+
 
 //**************RENDERING**************
 function renderPowerbar(){
@@ -97,9 +101,10 @@ function renderBall(){
 
 //**************GAME LOOP**************
 function gameLoop() {    
+    updateInstructionRect()  
+    updateCancelButton()
     updateBallPosition()
-    updateInstructionText()
-    updateInstructionRect()    
+    updateInstructionText()      
     renderBall()
     requestAnimationFrame(gameLoop)
 }
